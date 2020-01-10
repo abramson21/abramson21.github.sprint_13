@@ -27,9 +27,7 @@ app.use((req, res, next) => {
 
 const { PORT = 3000 } = process.env;
 
-app.use(express.static(path.join(__dirname, '/public/dist')));
 app.use('/',users);
-app.use('/', users);
 app.use('/', cards);
 app.listen(PORT, () => {});
 

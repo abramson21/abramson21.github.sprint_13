@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 
+const validate = /^(https|http)?:\/\/(www.)?[^-_.\s](\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(:\d+)?(.+[#a-zA-Z/:0-9]{1,})?\.(.+[#a-zA-Z/:0-9]{1,})?$/i;
+
 const cardSchema = new mongoose.Schema({
   name: {
       type: String,
@@ -9,12 +11,7 @@ const cardSchema = new mongoose.Schema({
   },
   link: {
     type: String,
-    validate: {
-      validator: function(v) {
-        const val = /^(https|http)?:\/\/(www.)?[^-_.\s](\d{1,3}.\d{1,3}.\d{1,3}.\d{1,3})?(:\d+)?(.+[#a-zA-Z/:0-9]{1,})?\.(.+[#a-zA-Z/:0-9]{1,})?$/;
-        return val.test(v);
-      },
-    },
+    match: validate,
     required: true
   },
   owner : {

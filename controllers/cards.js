@@ -21,6 +21,12 @@ module.exports.createCard = (req, res) => {
 
 module.exports.deleteCard = (req, res) => {
   Card.findByIdAndRemove(req.params.cardId)
-      .then(user => res.send({ data: user }))
-      .catch(() => res.status(500).send({ message: 'Данной карточки нет' }));
+  .then((card) => {
+    console.log(card);
+    if (card === null){
+      return res.status(404).send({ message: 'Данной карточки нет!'})
+    }
+    return res.send({ data: card })
+  })
+  .catch((error) => res.status(500).send({ message: error.message }));
 }
